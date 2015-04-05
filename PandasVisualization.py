@@ -37,13 +37,13 @@ def sessionItemBuys():
     session_item_buys = buys[["session", "item", "qty"]].groupby(["session", "item"]).sum()
     session_item_buys = session_item_buys["qty"]
     session_item_buys = session_item_buys.to_frame("bought")
-    del buys
+
 
 
     print "comecou cliks"
     clicks = clicksTable()
     session_item_clicks = clicks[["session", "item", "timestamp"]].groupby(["session", "item"]).count()
-    del clicks
+
     session_item_clicks = session_item_clicks["timestamp"]
     session_item_clicks = session_item_clicks.to_frame(name="clicks")
     #print clicks.groupby(["session"]).get_group(12)
