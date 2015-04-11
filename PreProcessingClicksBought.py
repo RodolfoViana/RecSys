@@ -12,7 +12,7 @@ import pandas as pd
 def buysTable():
     buys = pd.read_csv("data/yoochoose-buys.dat",
                    names=["session", "timestamp", "item", "price", "qty"],
-                   parse_dates=["timestamp"], nrows = 1000)
+                   parse_dates=["timestamp"])
 
     print "\n Buys head \n \n"
     return buys
@@ -22,7 +22,7 @@ def clicksTable():
     clicks = pd.read_csv("data/yoochoose-clicks.dat",
                      names=["session", "timestamp", "item", "category"],
                      parse_dates=["timestamp"],
-                     converters={"category": lambda c: -1 if c == "S" else c}, nrows=1000)
+                     converters={"category": lambda c: -1 if c == "S" else c})
 
     print "\n Clicks head \n \n"
     return clicks
