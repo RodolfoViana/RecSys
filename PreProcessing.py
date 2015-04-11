@@ -69,15 +69,15 @@ def sessionItemBuys():
     session_item_merge.fillna(0, inplace=True)
     session_item_merge = session_item_merge.drop("clicks", 1)
     session_item_merge.loc[session_item_merge["bought"] != 0, "bought"] = 1
-    session_item_merge.to_csv("clicksvsbought.csv")
+    session_item_merge.to_csv("sessionitembought.csv")
 
     # Now we have a table like this
 
-    # session   item         clicks  bought
-    # 490437  214716975       0       6
-    # 490459  214639327       0       1
-    # 490783  214706460       0       2
-    # 490792  214821277       0       2
+    # session   item         bought
+    # 490437  214716975        1
+    # 490459  214639327        0
+    # 490783  214706460        1
+    # 490792  214821277        1
 
 
 
