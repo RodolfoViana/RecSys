@@ -3,7 +3,7 @@ __author__ = 'rodolfo'
 
 # This programm has the fist pre-preocessing
 # at the end the file will have the format
-# session   item    bought
+# session   item  clicks  bought
 
 
 import pandas as pd
@@ -12,7 +12,7 @@ import pandas as pd
 def buysTable():
     buys = pd.read_csv("data/yoochoose-buys.dat",
                    names=["session", "timestamp", "item", "price", "qty"],
-                   parse_dates=["timestamp"])
+                   parse_dates=["timestamp"], nrows = 1000)
 
     print "\n Buys head \n \n"
     return buys
@@ -22,11 +22,10 @@ def clicksTable():
     clicks = pd.read_csv("data/yoochoose-clicks.dat",
                      names=["session", "timestamp", "item", "category"],
                      parse_dates=["timestamp"],
-                     converters={"category": lambda c: -1 if c == "S" else c})
+                     converters={"category": lambda c: -1 if c == "S" else c}, nrows=1000)
 
     print "\n Clicks head \n \n"
     return clicks
-
 
 # Tell how many itens was bought
 def sessionItemBuys():
@@ -67,9 +66,8 @@ def sessionItemBuys():
     print "comecou merge"
     session_item_merge = pd.merge(session_item_clicks, session_item_buys, how='outer', left_index=True, right_index=True)
     session_item_merge.fillna(0, inplace=True)
-    session_item_merge = session_item_merge.drop("clicks", 1)
     session_item_merge.loc[session_item_merge["bought"] != 0, "bought"] = 1
-    session_item_merge.to_csv("clicksvsbought.csv")
+    session_item_merge.to_csv("sessionitemclicksbought.csv")
 
     # Now we have a table like this
 
